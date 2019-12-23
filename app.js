@@ -17,9 +17,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/app_client'));
 
 mongoDb
-.connect(process.env.MONOGO_URL || 'mongodb://localhost:27017/localDb')
-.then(db => {
-  app.set('database', db);
+.connect(process.env.MONOGO_URL || 'mongodb://localhost:27017/local')
+.then(mongoClient => {
+  app.set('database', mongoClient.db());
   require('./api/routes')(app);
   app.listen(port);
   console.log('Started server on port ' + port);
